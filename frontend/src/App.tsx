@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { 
   Activity, BrainCircuit, GitMerge, LineChart, Shield, Zap, 
   Database, ChevronRight, BarChart3, Globe, Cpu, Rocket, 
-  ArrowRight, Plus, X, Sparkles, CheckCircle2
+  Plus, X, Sparkles, CheckCircle2
 } from 'lucide-react';
 import axios from 'axios';
 
