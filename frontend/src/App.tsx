@@ -943,7 +943,7 @@ export default function App() {
                   setWaitlistErrors(prev => ({...prev, name: undefined}));
                 }}
                 placeholder="Full Name" 
-                className={`w-full bg-[#0F111A] border ${waitlistErrors.name ? 'border-red-500' : 'border-white/10'} rounded-xl py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all`}
+                className={`w-full bg-[#0F111A] border ${waitlistErrors.name ? 'border-red-500' : 'border-white/10'} rounded-none py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:-translate-x-2`}
                 disabled={waitlistStatus !== 'idle'}
               />
               {waitlistErrors.name && <p className="text-red-500 text-xs mt-1 text-left px-2">{waitlistErrors.name}</p>}
@@ -958,7 +958,7 @@ export default function App() {
                   setWaitlistErrors(prev => ({...prev, phone: undefined}));
                 }}
                 placeholder="Phone Number (10 digits)" 
-                className={`w-full bg-[#0F111A] border ${waitlistErrors.phone ? 'border-red-500' : 'border-white/10'} rounded-xl py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all`}
+                className={`w-full bg-[#0F111A] border ${waitlistErrors.phone ? 'border-red-500' : 'border-white/10'} rounded-none py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:-translate-x-2`}
                 disabled={waitlistStatus !== 'idle'}
               />
               {waitlistErrors.phone && <p className="text-red-500 text-xs mt-1 text-left px-2">{waitlistErrors.phone}</p>}
@@ -973,7 +973,7 @@ export default function App() {
                   setWaitlistErrors(prev => ({...prev, email: undefined}));
                 }}
                 placeholder="Email Address" 
-                className={`w-full bg-[#0F111A] border ${waitlistErrors.email ? 'border-red-500' : 'border-white/10'} rounded-xl py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all`}
+                className={`w-full bg-[#0F111A] border ${waitlistErrors.email ? 'border-red-500' : 'border-white/10'} rounded-none py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:-translate-x-2`}
                 disabled={waitlistStatus !== 'idle'}
               />
               {waitlistErrors.email && <p className="text-red-500 text-xs mt-1 text-left px-2">{waitlistErrors.email}</p>}
@@ -982,9 +982,11 @@ export default function App() {
             <button 
               type="submit"
               disabled={waitlistStatus !== 'idle'}
-              className="w-full bg-indigo-500 hover:bg-indigo-600 disabled:bg-indigo-500/50 text-white py-4 px-6 rounded-xl font-bold transition-colors flex items-center justify-center gap-2 mt-2"
+              className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500/50 text-black py-4 px-6 rounded-none font-bold transition-all flex items-center justify-center mt-4 -skew-x-12"
             >
-               {waitlistStatus === 'idle' ? 'Reserve Spot' : waitlistStatus === 'loading' ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div> : 'Reserved!'}
+               <span className="skew-x-12 flex items-center justify-center gap-2">
+                 {waitlistStatus === 'idle' ? 'RESERVE SPOT' : waitlistStatus === 'loading' ? <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin"></div> : 'RESERVED!'}
+               </span>
             </button>
           </form>
           {waitlistErrors.general && <p className="text-red-500 text-sm mt-4 text-center font-medium animate-[fadeIn_0.3s_ease-out]">{waitlistErrors.general}</p>}
