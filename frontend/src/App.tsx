@@ -45,7 +45,8 @@ export default function App() {
     setWaitlistStatus('loading');
     setWaitlistErrors({});
     try {
-      await axios.post('http://localhost:3000/api/waitlist', { 
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      await axios.post(`${API_URL}/api/waitlist`, { 
         name: fullName, 
         phone: phoneNumber, 
         email: waitlistEmail 
