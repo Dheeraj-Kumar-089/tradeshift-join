@@ -10,10 +10,8 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('nervous-system');
   const [scrolled, setScrolled] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [waitlistStatus, setWaitlistStatus] = useState('idle');
-  const [waitlistErrors, setWaitlistErrors] = useState<{name?: string, phone?: string, email?: string, general?: string}>({});
+  const [waitlistErrors, setWaitlistErrors] = useState<{email?: string, general?: string}>({});
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   
   // Strategy Builder & Backtesting States
@@ -47,21 +45,15 @@ export default function App() {
     try {
       const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
       await axios.post(`${API_URL}/api/waitlist`, { 
-        name: fullName, 
-        phone: phoneNumber, 
         email: waitlistEmail 
       });
       setWaitlistStatus('success');
       setWaitlistEmail('');
-      setFullName('');
-      setPhoneNumber('');
     } catch (error: any) {
       console.error('Failed to submit waitlist', error);
       if (error.response?.data?.errors) {
         const newErrors: any = {};
         error.response.data.errors.forEach((err: any) => {
-           if (err.path === 'name') newErrors.name = err.msg;
-           if (err.path === 'phone') newErrors.phone = err.msg;
            if (err.path === 'email') newErrors.email = err.msg;
         });
         setWaitlistErrors(newErrors);
@@ -935,35 +927,7 @@ export default function App() {
             Join the exclusive waitlist to secure your spot. We're rolling out access in batches to ensure system stability.
           </p>
           <form id="waitlist-form" onSubmit={handleWaitlistSubmit} className="max-w-md mx-auto flex flex-col gap-4 mb-16">
-            <div className="w-full">
-              <input 
-                type="text" 
-                value={fullName}
-                onChange={(e) => {
-                  setFullName(e.target.value);
-                  setWaitlistErrors(prev => ({...prev, name: undefined}));
-                }}
-                placeholder="Full Name" 
-                className={`w-full bg-[#0F111A] border ${waitlistErrors.name ? 'border-red-500' : 'border-white/10'} rounded-none py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:-translate-x-2`}
-                disabled={waitlistStatus !== 'idle'}
-              />
-              {waitlistErrors.name && <p className="text-red-500 text-xs mt-1 text-left px-2">{waitlistErrors.name}</p>}
-            </div>
-            
-            <div className="w-full">
-              <input 
-                type="tel" 
-                value={phoneNumber}
-                onChange={(e) => {
-                  setPhoneNumber(e.target.value);
-                  setWaitlistErrors(prev => ({...prev, phone: undefined}));
-                }}
-                placeholder="Phone Number (10 digits)" 
-                className={`w-full bg-[#0F111A] border ${waitlistErrors.phone ? 'border-red-500' : 'border-white/10'} rounded-none py-4 px-6 text-white focus:outline-none focus:border-indigo-500 transition-all duration-300 hover:scale-110 hover:-translate-y-2 hover:-translate-x-2`}
-                disabled={waitlistStatus !== 'idle'}
-              />
-              {waitlistErrors.phone && <p className="text-red-500 text-xs mt-1 text-left px-2">{waitlistErrors.phone}</p>}
-            </div>
+
 
             <div className="w-full">
               <input 

@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/', waitlistValidator, validate, async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name, email, phone } = req.body;
+    const { email } = req.body;
     
     const existingUser = await Waitlist.findOne({ email });
     if (existingUser) {
@@ -14,7 +14,7 @@ router.post('/', waitlistValidator, validate, async (req: Request, res: Response
        return;
     }
 
-    await Waitlist.create({ name, email, phone });
+    await Waitlist.create({ email });
     
     res.status(201).json({ message: 'Successfully joined waitlist' });
   } catch (error: any) {
