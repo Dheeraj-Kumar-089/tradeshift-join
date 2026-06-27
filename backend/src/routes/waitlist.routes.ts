@@ -10,7 +10,7 @@ router.post('/', waitlistValidator, validate, async (req: Request, res: Response
     
     const existingUser = await Waitlist.findOne({ email });
     if (existingUser) {
-       res.status(400).json({ message: 'you are already joined. Thanks for giving your valuable time' });
+       res.status(400).json({ message: 'You are already joined. Thanks for giving your valuable time' });
        return;
     }
 
